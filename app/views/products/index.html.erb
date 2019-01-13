@@ -1,0 +1,20 @@
+<% if @products.present? %>
+  <% @products.each do |product_row| %>
+    <div class="row">
+      <% product_row.each do |product| %>
+      <div class="card" style="width: 18rem;">
+        <!--  <img src="..." class="card-img-top" alt="...">-->
+        <div class="card-header"><%= product.name %></div>
+        <div class="card-body">
+          <% product.package_bundles.each do |bundle| %>
+            <p class="card-text"><%= bundle.num_of_item %>@$<%= bundle.cost_amount.to_f %></p>
+             <% end %>
+        </div>
+        <div class="card-footer">Code: <%=product.code %></div>
+      </div>
+      <% end %>
+    </div>
+  <% end %>
+  <br>
+  <a href="#" class="btn btn-primary">Create order</a>
+<% end %>
