@@ -4,6 +4,8 @@ class ProductOrder < ApplicationRecord
 
   before_save :process_bundles
 
+  validate :validate_quantity
+
   private
 
   def process_bundles
@@ -30,4 +32,24 @@ class ProductOrder < ApplicationRecord
 
   end
 
+  def validate_quantity
+    return unless quantity.present? && product_code.present? && !quantity.zero?
+    product = Product.where(code: product_code).first
+    return unless product.present?
+    total_quantity = quantity
+    bundles = product.package_bundles.order(num_of_item: :desc)
+    bundles.each do |p|
+      break if total_quantity.zero?
+      num = total_quantity / p.num_of_item
+      mod = total_quantity % p.num_of_item
+      if num > 0
+        unless mod.zero?
+          next if product.find_next_bundle(mod, p.id)
+        end
+        total_quantity -= num * p.num_of_item
+      end
+    end
+    return if total_quantity.zero?
+    errors.add('quantity', 'No bundle available')
+  end
 end
