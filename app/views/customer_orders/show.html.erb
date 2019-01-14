@@ -16,15 +16,17 @@
         </thead>
         <tbody>
         <% @customer_order.product_orders.each do |order| %>
-          <tr>
-            <td><%= order.quantity %></td>
-            <td><%= order.product_code %></td>
-            <td><%= number_to_currency(order.try(:cost_amount)) %><br>
-              <% order.package_orders.each do |p| %>
-                <%= p.quantity %>&nbsp;x&nbsp;<%= p.package_bundle.num_of_item %>&nbsp;<%=number_to_currency(p.package_bundle.cost_amount) %><br>
-              <% end %>
-            </td>
-          </tr>
+          <% if order.quantity.present? && order.quantity > 0 %>
+            <tr>
+              <td><%= order.quantity %></td>
+              <td><%= order.product_code %></td>
+              <td><%= number_to_currency(order.try(:cost_amount)) %><br>
+                <% order.package_orders.each do |p| %>
+                  <%= p.quantity %>&nbsp;x&nbsp;<%= p.package_bundle.num_of_item %>&nbsp;<%=number_to_currency(p.package_bundle.cost_amount) %><br>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
         </tbody>
       </table>

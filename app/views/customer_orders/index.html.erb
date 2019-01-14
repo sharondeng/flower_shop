@@ -3,27 +3,29 @@
 <h1>Customer Orders</h1>
 <table class="table table-hover table-condensed">
   <thead>
-    <tr bgcolor="#d3d3d3">
-      <th><b>ID</b></th>
-      <th><b>Customer Name</b></th>
-      <th><b>Products</b></th>
-      <th><b>Action</b></th>
-    </tr>
+  <tr bgcolor="#d3d3d3">
+    <th><b>ID</b></th>
+    <th><b>Customer Name</b></th>
+    <th><b>Products</b></th>
+    <th><b>Action</b></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @customer_orders.each do |customer_order| %>
-      <tr>
-        <td><%= link_to customer_order.id, customer_order%></td>
-        <td><%= customer_order.customer.name %></td>
-        <td>
-          <% customer_order.product_orders.each do |order| %>
+  <% @customer_orders.each do |customer_order| %>
+    <tr>
+      <td><%= link_to customer_order.id, customer_order%></td>
+      <td><%= customer_order.customer.name %></td>
+      <td>
+        <% customer_order.product_orders.each do |order| %>
+          <% if order.quantity.present? && order.quantity > 0 %>
             <%= order.quantity %>&nbsp<%= order.product_code %>&nbsp<%= number_to_currency(order.cost_amount) %><br>
           <% end %>
-        </td>
-        <td><%= link_to 'Show', customer_order %>&nbsp<%= link_to 'Edit', edit_customer_order_path(customer_order) %>&nbsp<%= link_to 'Destroy', customer_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+        <% end %>
+      </td>
+      <td><%= link_to 'Show', customer_order %>&nbsp<%= link_to 'Edit', edit_customer_order_path(customer_order) %>&nbsp<%= link_to 'Destroy', customer_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
 
