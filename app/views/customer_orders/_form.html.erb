@@ -1,17 +1,19 @@
-<%= form_with(model: customer_order, local: true) do |form| %>
-  <% if customer_order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(customer_order.errors.count, "error") %> prohibited this customer_order from being saved:</h2>
-
-      <ul>
-      <% customer_order.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+<%= semantic_form_for @customer_order, html: {multipart: true} do |f| %>
+  <%= f.inputs do %>
+    <% if f.object.new_record? %>
+      <%#= f.hidden_field :user_id, value: current_user.id %>
+      <%#= hidden_field_tag('user_id', current_user.id) %>
+    <% end %>
+    <%#= f.input :total_cost_amount %>
+    <%= f.semantic_fields_for :customer do |cust| %>
+      <%= cust.input :name, required: false, label: 'Customer name'.html_safe, as: :string %>
+      <%= cust.input :address, required: false, label: 'Shipping address'.html_safe, as: :string %>
+    <% end %>
+    <%= f.semantic_fields_for :product_orders do |product| %>
+      <%= product.input :quantity, required: false, label: 'quantity'.html_safe, as: :string %>
+      <%= product.input :product_code, required: false, label: 'Product code'.html_safe, as: :string %>
+    <% end %>
   <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <br>
+  <%= f.submit class: 'btn btn-primary' %>
 <% end %>

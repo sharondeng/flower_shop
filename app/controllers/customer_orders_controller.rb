@@ -15,6 +15,12 @@ class CustomerOrdersController < ApplicationController
   # GET /customer_orders/new
   def new
     @customer_order = CustomerOrder.new
+    Product.all.each do |p|
+      @customer_order.product_orders.build(product_code: p.code)
+    end
+
+    @customer_order.build_customer
+
   end
 
   # GET /customer_orders/1/edit
@@ -62,13 +68,14 @@ class CustomerOrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_customer_order
-      @customer_order = CustomerOrder.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def customer_order_params
-      params.fetch(:customer_order, {})
-    end
+  def set_customer_order
+    @customer_order = CustomerOrder.find(params[:id])
+  end
+
+  def customer_order_params
+    params.require(:customer_order).permit(:total_cost_amount,
+                                           customer_attributes: [:id, :name, :address],
+                                           product_orders_attributes: [:id, :customer_order_id, :product_code, :quantity, :cost_amont])
+  end
 end

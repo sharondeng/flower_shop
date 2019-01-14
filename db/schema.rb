@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190113031847) do
+ActiveRecord::Schema.define(version: 20190113205905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "customer_orders", force: :cascade do |t|
-    t.integer "customer_id"
     t.decimal "total_cost_amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "customers", force: :cascade do |t|
+    t.integer "customer_order_id"
     t.string "name"
     t.string "address"
     t.datetime "created_at", null: false
@@ -38,9 +38,19 @@ ActiveRecord::Schema.define(version: 20190113031847) do
     t.index ["product_id"], name: "index_package_bundles_on_product_id"
   end
 
+  create_table "package_orders", force: :cascade do |t|
+    t.integer "product_order_id"
+    t.integer "package_bundle_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "product_orders", force: :cascade do |t|
-    t.integer "product_id"
     t.integer "customer_order_id"
+    t.string "product_code"
+    t.integer "quantity"
+    t.decimal "cost_amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

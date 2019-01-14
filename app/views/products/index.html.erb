@@ -7,7 +7,7 @@
         <div class="card-header"><%= product.name %></div>
         <div class="card-body">
           <% product.package_bundles.each do |bundle| %>
-            <p class="card-text"><%= bundle.num_of_item %>@$<%= bundle.cost_amount.to_f %></p>
+            <p class="card-text"><%= bundle.num_of_item %>&nbsp;@&nbsp;<%= number_to_currency(bundle.cost_amount) %></p>
              <% end %>
         </div>
         <div class="card-footer">Code: <%=product.code %></div>
@@ -16,5 +16,6 @@
     </div>
   <% end %>
   <br>
-  <a href="#" class="btn btn-primary">Create order</a>
+  <%= link_to 'Create order', new_customer_order_path, class: "btn btn-primary" %>
+<!--  <a href="#" class="btn btn-primary">Create order</a>-->
 <% end %>
