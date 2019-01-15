@@ -3,7 +3,6 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
 
 * Ruby version: ruby-2.4.1
 
@@ -12,6 +11,7 @@ bundle install
 * Database: PostgreSQL
 
 * Create Database with postgres for the project:
+
 In development 
 
 CREATE USER dev WITH PASSWORD 'password’;
@@ -25,13 +25,19 @@ CREATE USER production WITH PASSWORD 'password’;
 CREATE DATABASE flower_shop_production OWNER production;
 
 * Database migration and seed
+
 In development
+
 bundle exec rake db:migrate
+
 bundle exec rake db:seed
 
 In production
+
 bundle exec rake db:migrate RAILS_ENV=production
+
 bundle exec rake db:seed RAILS_ENV=production
+
 bundle exec rake assets:precompile RAILS_ENV=production (pre-compile in prod)
 
 * Run it
