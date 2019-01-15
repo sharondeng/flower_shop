@@ -4,8 +4,8 @@
       <% product_row.each do |product| %>
       <div class="card" style="width: 18rem;">
         <!--  <img src="..." class="card-img-top" alt="...">-->
-        <div class="card-header"><%= product.name %></div>
-        <% pic = "#{product.code.upcase}.jpeg" %>
+        <div class="card-header"><b><%= product.name %></b></div>
+        <% pic = "#{product.code.upcase}.jpg" %>
         <%= image_tag pic %>
         <div class="card-body">
           <% product.package_bundles.each do |bundle| %>
