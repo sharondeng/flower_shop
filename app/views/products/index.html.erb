@@ -5,6 +5,8 @@
       <div class="card" style="width: 18rem;">
         <!--  <img src="..." class="card-img-top" alt="...">-->
         <div class="card-header"><%= product.name %></div>
+        <% pic = "#{product.code.upcase}.jpeg" %>
+        <%= image_tag pic %>
         <div class="card-body">
           <% product.package_bundles.each do |bundle| %>
             <p class="card-text"><%= bundle.num_of_item %>&nbsp;@&nbsp;<%= number_to_currency(bundle.cost_amount) %></p>
