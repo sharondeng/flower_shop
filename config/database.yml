@@ -37,3 +37,11 @@ default: &default
 development:
   <<: *default
   database: flower_shop_development
+
+test:
+  <<: *default
+  database: flower_shop_test
+
+production:
+  <<: *default
+  database: flower_shop_production
