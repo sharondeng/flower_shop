@@ -6,7 +6,7 @@ application up and running.
 
 * Ruby version: ruby-2.4.1
 
-  bundle install
+    bundle install
 
 * Database: PostgreSQL
 
