@@ -46,7 +46,7 @@ application up and running.
 
       rails s
 
-  In producion, need to generate a secret key by
+  In production, need to generate a secret key by
 
       RAILS_ENV=production rake secret
 
