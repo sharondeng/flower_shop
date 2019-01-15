@@ -29,6 +29,14 @@
           <% end %>
         <% end %>
         </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="2">
+              <b>Total Cost</b>
+            </th>
+            <th><%= number_to_currency(@customer_order.total_cost_amount) %></th>
+          </tr>
+        </tfoot>
       </table>
     </div>
   </div>

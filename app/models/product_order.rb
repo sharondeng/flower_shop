@@ -1,6 +1,6 @@
 class ProductOrder < ApplicationRecord
-  belongs_to :customer_order
-  has_many :package_orders
+  belongs_to :customer_order, inverse_of: :product_orders, touch: true
+  has_many :package_orders, inverse_of: :product_order
 
   before_save :process_bundles
 
@@ -29,7 +29,7 @@ class ProductOrder < ApplicationRecord
         self.cost_amount += num * p.cost_amount
       end
     end
-
+    customer_order.touch if customer_order.present?
   end
 
   def validate_quantity
