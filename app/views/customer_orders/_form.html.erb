@@ -6,11 +6,13 @@
     <% end %>
     <%= f.semantic_fields_for :product_orders do |product| %>
       <div class="shop-inline">
-      <%= product.input :quantity, required: false, label: 'Quantity'.html_safe, as: :shop_string %>
-      <%= product.input :product_code, required: false, label: 'Product code'.html_safe, as: :shop_string, input_html: { readonly:  true } %>
+        <%= product.input :quantity, required: false, label: 'Quantity'.html_safe, as: :shop_string %>
+        <%= product.input :product_code, required: false, label: 'Product code'.html_safe, as: :shop_string, input_html: { readonly:  true } %>
+        <p style="color:darkgrey; font-size: 0.95rem;">Available bundle: <%= bundle_size(product.object.product_code) %></p>
       </div>
+      <hr>
     <% end %>
   <% end %>
   <br>
-  <%= f.submit class: 'btn btn-primary' %>
+  <%= f.submit 'Create Customer Order', class: 'btn btn-primary' %>
 <% end %>
