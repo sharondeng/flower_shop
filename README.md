@@ -34,6 +34,7 @@ of bundles.
 
 Each order has a series of lines with each line containing the number of items followed by
 the product code
+
 An example input:
 ```
 10 R12
