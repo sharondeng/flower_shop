@@ -107,3 +107,6 @@ An example input:
 
       RAILS_ENV=production bundle exec rails s
 
+* Run test
+
+    rspec
