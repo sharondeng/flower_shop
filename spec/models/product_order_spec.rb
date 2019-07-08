@@ -44,6 +44,7 @@ RSpec.describe ProductOrder, type: :model do
         rose_order.save
         expect(rose_order.package_orders.map(&:package_bundle)).to match ([package_10])
         expect(rose_order.package_orders.pluck(:quantity)).to match ([1])
+        expect(rose_order.cost_amount).to eq (package_10.cost_amount)
       end
 
     end
@@ -59,6 +60,7 @@ RSpec.describe ProductOrder, type: :model do
         lily_order.save
         expect(lily_order.package_orders.map(&:package_bundle)).to match ([package_9, package_6])
         expect(lily_order.package_orders.pluck(:quantity)).to match ([1, 1])
+        expect(lily_order.cost_amount).to eq (package_9.cost_amount + package_6.cost_amount)
       end
     end
 
@@ -68,11 +70,12 @@ RSpec.describe ProductOrder, type: :model do
       let(:package_5) { tulip_p.package_bundles.find_by(num_of_item: 5) }
       let(:package_9) { tulip_p.package_bundles.find_by(num_of_item: 9) }
 
-      it 'should be 2 bundle of 5 and 1 bundle of 3' do
+      it 'should be 2 bundles of 5 and 1 bundle of 3' do
         tulip_order.quantity = 13
         tulip_order.save
         expect(tulip_order.package_orders.map(&:package_bundle)).to match ([package_5, package_3])
         expect(tulip_order.package_orders.pluck(:quantity)).to match ([2, 1])
+        expect(tulip_order.cost_amount).to eq (2 * package_5.cost_amount + package_3.cost_amount)
       end
     end
   end
