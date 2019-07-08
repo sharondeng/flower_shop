@@ -8,6 +8,7 @@
     <th><b>Customer Name</b></th>
     <th><b>Products</b></th>
     <th><b>Total Cost</b></th>
+    <th><b>Created at</b></th>
     <th><b>Action</b></th>
   </tr>
   </thead>
@@ -25,6 +26,7 @@
         <% end %>
       </td>
       <td><%= number_to_currency(customer_order.total_cost_amount) %></td>
+      <td><%= customer_order.created_at %></td>
       <td><%= link_to 'Show', customer_order %>&nbsp<%= link_to 'Edit', edit_customer_order_path(customer_order) %>&nbsp<%= link_to 'Destroy', customer_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
